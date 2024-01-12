@@ -1,0 +1,10 @@
+	component lab1_qsys is
+		port (
+			clk_clk                                  : in  std_logic                    := 'X';             -- clk
+			pioleds_external_connection_export       : out std_logic_vector(9 downto 0);                    -- export
+			piopushbutton_external_connection_export : in  std_logic                    := 'X';             -- export
+			pioswitch_external_connection_export     : in  std_logic_vector(3 downto 0) := (others => 'X'); -- export
+			reset_reset_n                            : in  std_logic                    := 'X'              -- reset_n
+		);
+	end component lab1_qsys;
+
