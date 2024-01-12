@@ -139,10 +139,10 @@ ACDS_VERSION := 18.0
 # Define path to the application ELF. 
 # It may be used by the makefile fragments so is defined before including them. 
 # 
-ELF := ../bin/prog.elf
+ELF := prog.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS += main.c
+C_SRCS += ../main.c
 CXX_SRCS :=
 ASM_SRCS :=
 
@@ -180,7 +180,7 @@ CRT0 :=
 SYS_LIB :=
 
 # Define path to the root of the BSP.
-BSP_ROOT_DIR := ../bsp/
+BSP_ROOT_DIR := ../bsp
 
 # List of application specific include directories, library directories and library names
 APP_INCLUDE_DIRS :=
