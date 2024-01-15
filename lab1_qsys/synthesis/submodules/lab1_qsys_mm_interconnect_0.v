@@ -49,9 +49,15 @@ module lab1_qsys_mm_interconnect_0 (
 		output wire [31:0] pioLEDs_s1_writedata,                           //                                         .writedata
 		output wire        pioLEDs_s1_chipselect,                          //                                         .chipselect
 		output wire [1:0]  pioPushButton_s1_address,                       //                         pioPushButton_s1.address
+		output wire        pioPushButton_s1_write,                         //                                         .write
 		input  wire [31:0] pioPushButton_s1_readdata,                      //                                         .readdata
+		output wire [31:0] pioPushButton_s1_writedata,                     //                                         .writedata
+		output wire        pioPushButton_s1_chipselect,                    //                                         .chipselect
 		output wire [1:0]  pioSwitch_s1_address,                           //                             pioSwitch_s1.address
-		input  wire [31:0] pioSwitch_s1_readdata                           //                                         .readdata
+		output wire        pioSwitch_s1_write,                             //                                         .write
+		input  wire [31:0] pioSwitch_s1_readdata,                          //                                         .readdata
+		output wire [31:0] pioSwitch_s1_writedata,                         //                                         .writedata
+		output wire        pioSwitch_s1_chipselect                         //                                         .chipselect
 	);
 
 	wire         nios2_gen2_0_data_master_translator_avalon_universal_master_0_waitrequest;          // nios2_gen2_0_data_master_agent:av_waitrequest -> nios2_gen2_0_data_master_translator:uav_waitrequest
@@ -894,10 +900,11 @@ module lab1_qsys_mm_interconnect_0 (
 		.uav_lock               (piopushbutton_s1_agent_m0_lock),                 //                         .lock
 		.uav_debugaccess        (piopushbutton_s1_agent_m0_debugaccess),          //                         .debugaccess
 		.av_address             (pioPushButton_s1_address),                       //      avalon_anti_slave_0.address
+		.av_write               (pioPushButton_s1_write),                         //                         .write
 		.av_readdata            (pioPushButton_s1_readdata),                      //                         .readdata
-		.av_write               (),                                               //              (terminated)
+		.av_writedata           (pioPushButton_s1_writedata),                     //                         .writedata
+		.av_chipselect          (pioPushButton_s1_chipselect),                    //                         .chipselect
 		.av_read                (),                                               //              (terminated)
-		.av_writedata           (),                                               //              (terminated)
 		.av_begintransfer       (),                                               //              (terminated)
 		.av_beginbursttransfer  (),                                               //              (terminated)
 		.av_burstcount          (),                                               //              (terminated)
@@ -906,7 +913,6 @@ module lab1_qsys_mm_interconnect_0 (
 		.av_waitrequest         (1'b0),                                           //              (terminated)
 		.av_writebyteenable     (),                                               //              (terminated)
 		.av_lock                (),                                               //              (terminated)
-		.av_chipselect          (),                                               //              (terminated)
 		.av_clken               (),                                               //              (terminated)
 		.uav_clken              (1'b0),                                           //              (terminated)
 		.av_debugaccess         (),                                               //              (terminated)
@@ -958,10 +964,11 @@ module lab1_qsys_mm_interconnect_0 (
 		.uav_lock               (pioswitch_s1_agent_m0_lock),                     //                         .lock
 		.uav_debugaccess        (pioswitch_s1_agent_m0_debugaccess),              //                         .debugaccess
 		.av_address             (pioSwitch_s1_address),                           //      avalon_anti_slave_0.address
+		.av_write               (pioSwitch_s1_write),                             //                         .write
 		.av_readdata            (pioSwitch_s1_readdata),                          //                         .readdata
-		.av_write               (),                                               //              (terminated)
+		.av_writedata           (pioSwitch_s1_writedata),                         //                         .writedata
+		.av_chipselect          (pioSwitch_s1_chipselect),                        //                         .chipselect
 		.av_read                (),                                               //              (terminated)
-		.av_writedata           (),                                               //              (terminated)
 		.av_begintransfer       (),                                               //              (terminated)
 		.av_beginbursttransfer  (),                                               //              (terminated)
 		.av_burstcount          (),                                               //              (terminated)
@@ -970,7 +977,6 @@ module lab1_qsys_mm_interconnect_0 (
 		.av_waitrequest         (1'b0),                                           //              (terminated)
 		.av_writebyteenable     (),                                               //              (terminated)
 		.av_lock                (),                                               //              (terminated)
-		.av_chipselect          (),                                               //              (terminated)
 		.av_clken               (),                                               //              (terminated)
 		.uav_clken              (1'b0),                                           //              (terminated)
 		.av_debugaccess         (),                                               //              (terminated)
