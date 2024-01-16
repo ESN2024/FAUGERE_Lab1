@@ -2,7 +2,8 @@
 #include "../bsp/system.h"
 #include "../bsp/drivers/inc/altera_avalon_pio_regs.h"
 #include "../bsp/drivers/inc/altera_avalon_timer_regs.h"
-#include "../bsp/HAL/inc/sys/alt_irq.h"
+#include "../bsp/HAL/inc/sys/alt_stdio.h"
+#include "../bsp/HAL/inc/sys/alt_irq.h"	
 #include "../bsp/HAL/inc/sys/alt_sys_init.h"
 #include <io.h>
 #include <alt_types.h>
@@ -24,10 +25,11 @@ static void pushButton_IRQHandler (void * context, alt_u32 id)	{
 }
 
 static void switch_IRQHandler (void * context, alt_u32 id)	{
-
 	// changement vitesse (période du timer)
-	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, IORD_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE)&(~(ALTERA_AVALON_TIMER_CONTROL_START_MSK|ALTERA_AVALON_TIMER_CONTROL_STOP_MSK)));
-	alt_u32 timerCnt = 500000 + (alt_u32)IORD_ALTERA_AVALON_PIO_SET_BITS(PIOSWITCH_BASE)*(50000000 - 500000)/15;
+	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, IORD_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE)&
+		(~(ALTERA_AVALON_TIMER_CONTROL_START_MSK|ALTERA_AVALON_TIMER_CONTROL_STOP_MSK))); // permet de ne pas arrêter le compteur lors du changement de la période
+	alt_u32 timerCnt = 500000 + (alt_u32)IORD_ALTERA_AVALON_PIO_DATA(PIOSWITCH_BASE)*(50000000 - 500000)/15;
+
 	IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER_BASE, (timerCnt)&0xFFFF);
 	IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER_BASE, ((timerCnt)&(0xFFFF<<16))>>16);
 
@@ -88,8 +90,8 @@ int main()	{
 	/* --- timer init --- */
 	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, ALTERA_AVALON_TIMER_CONTROL_ITO_MSK|ALTERA_AVALON_TIMER_CONTROL_CONT_MSK|ALTERA_AVALON_TIMER_CONTROL_STOP_MSK);
 	// set initial period (1s)
-	IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER_BASE, (50000000)&0xFFFF);
-	IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER_BASE, ((50000000)&(0xFFFF<<16))>>16);
+	IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER_BASE, (500000)&0xFFFF);
+	IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER_BASE, ((500000)&(0xFFFF<<16))>>16);
 	/* --- */
 
 	while(1);
