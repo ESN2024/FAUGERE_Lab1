@@ -5,20 +5,21 @@ preplace inst lab1_qsys.nios2_gen2_0 -pg 1 -lvl 2 -y 160
 preplace inst lab1_qsys -pg 1 -lvl 1 -y 40 -regy -20
 preplace inst lab1_qsys.nios2_gen2_0.clock_bridge -pg 1
 preplace inst lab1_qsys.clk_0 -pg 1 -lvl 1 -y 230
-preplace inst lab1_qsys.pioPushButton -pg 1 -lvl 3 -y 370
-preplace inst lab1_qsys.pioLEDs -pg 1 -lvl 3 -y 270
+preplace inst lab1_qsys.pioPushButton -pg 1 -lvl 3 -y 350
+preplace inst lab1_qsys.timer -pg 1 -lvl 3 -y 590
+preplace inst lab1_qsys.pioLEDs -pg 1 -lvl 3 -y 250
 preplace inst lab1_qsys.pioSwitch -pg 1 -lvl 3 -y 470
 preplace inst lab1_qsys.jtag_uart_0 -pg 1 -lvl 3 -y 90
-preplace inst lab1_qsys.onchip_memory -pg 1 -lvl 3 -y 570
+preplace inst lab1_qsys.onchip_memory -pg 1 -lvl 3 -y 690
 preplace inst lab1_qsys.nios2_gen2_0.cpu -pg 1
-preplace netloc INTERCONNECT<net_container>lab1_qsys</net_container>(SLAVE)pioSwitch.s1,(SLAVE)pioPushButton.s1,(SLAVE)pioLEDs.s1,(SLAVE)jtag_uart_0.avalon_jtag_slave,(MASTER)nios2_gen2_0.instruction_master,(SLAVE)onchip_memory.s1,(MASTER)nios2_gen2_0.data_master,(SLAVE)nios2_gen2_0.debug_mem_slave) 1 1 2 470 60 870
+preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)lab1_qsys.clk,(SLAVE)clk_0.clk_in) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>lab1_qsys</net_container>(SLAVE)jtag_uart_0.irq,(SLAVE)pioPushButton.irq,(MASTER)nios2_gen2_0.irq,(SLAVE)pioSwitch.irq,(SLAVE)timer.irq) 1 2 1 850
+preplace netloc FAN_OUT<net_container>lab1_qsys</net_container>(SLAVE)onchip_memory.clk1,(SLAVE)nios2_gen2_0.clk,(SLAVE)pioSwitch.clk,(SLAVE)pioLEDs.clk,(MASTER)clk_0.clk,(SLAVE)pioPushButton.clk,(SLAVE)jtag_uart_0.clk,(SLAVE)timer.clk) 1 1 2 430 300 890
+preplace netloc INTERCONNECT<net_container>lab1_qsys</net_container>(SLAVE)nios2_gen2_0.debug_mem_slave,(MASTER)nios2_gen2_0.instruction_master,(SLAVE)pioLEDs.s1,(MASTER)nios2_gen2_0.data_master,(SLAVE)jtag_uart_0.avalon_jtag_slave,(SLAVE)timer.s1,(SLAVE)onchip_memory.s1,(SLAVE)pioPushButton.s1,(SLAVE)pioSwitch.s1) 1 1 2 470 540 830
 preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)lab1_qsys.pioleds_external_connection,(SLAVE)pioLEDs.external_connection) 1 0 3 NJ 40 NJ 40 NJ
-preplace netloc FAN_OUT<net_container>lab1_qsys</net_container>(SLAVE)pioSwitch.clk,(SLAVE)jtag_uart_0.clk,(SLAVE)onchip_memory.clk1,(SLAVE)pioLEDs.clk,(SLAVE)pioPushButton.clk,(MASTER)clk_0.clk,(SLAVE)nios2_gen2_0.clk) 1 1 2 410 80 890
-preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)pioPushButton.external_connection,(SLAVE)lab1_qsys.piopushbutton_external_connection) 1 0 3 NJ 220 NJ 120 NJ
-preplace netloc POINT_TO_POINT<net_container>lab1_qsys</net_container>(MASTER)nios2_gen2_0.irq,(SLAVE)jtag_uart_0.irq) 1 2 1 910
-preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)lab1_qsys.pioswitch_external_connection,(SLAVE)pioSwitch.external_connection) 1 0 3 NJ 500 NJ 500 NJ
-preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)clk_0.clk_in,(SLAVE)lab1_qsys.clk) 1 0 1 NJ
-preplace netloc FAN_OUT<net_container>lab1_qsys</net_container>(SLAVE)nios2_gen2_0.reset,(SLAVE)jtag_uart_0.reset,(SLAVE)pioLEDs.reset,(SLAVE)pioPushButton.reset,(SLAVE)onchip_memory.reset1,(SLAVE)pioSwitch.reset,(MASTER)clk_0.clk_reset) 1 1 2 450 100 830
+preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)lab1_qsys.piopushbutton_external_connection,(SLAVE)pioPushButton.external_connection) 1 0 3 NJ 220 NJ 120 NJ
+preplace netloc FAN_OUT<net_container>lab1_qsys</net_container>(SLAVE)onchip_memory.reset1,(SLAVE)pioSwitch.reset,(SLAVE)pioLEDs.reset,(SLAVE)timer.reset,(SLAVE)jtag_uart_0.reset,(SLAVE)pioPushButton.reset,(SLAVE)nios2_gen2_0.reset,(MASTER)clk_0.clk_reset) 1 1 2 450 520 930
+preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)pioSwitch.external_connection,(SLAVE)lab1_qsys.pioswitch_external_connection) 1 0 3 NJ 500 NJ 500 NJ
 preplace netloc EXPORT<net_container>lab1_qsys</net_container>(SLAVE)clk_0.clk_in_reset,(SLAVE)lab1_qsys.reset) 1 0 1 NJ
 levelinfo -pg 1 0 200 1130
 levelinfo -hier lab1_qsys 210 240 590 970 1120

@@ -1,5 +1,0 @@
-- BSP generation : nios2-bsp hal <out_bsp_dir> <system.sopcinfo>
-- Generate Makefile template : 
-nios2-app-generate-makefile --app-dir <out_dir> --bsp-dir <bsp_dir> --elf-name <exec_name.elf> --src-files <c_src_file.c>
-- make to build code
-- make download-elf
