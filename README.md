@@ -24,7 +24,7 @@ Gestion de l'affichage du chenillard en C sur processeur NIOS II
 
 --------------------------
 
-![Impossible d'afficher l'image](img/design.jpg "Design du chenillard")
+![Impossible d'afficher l'image](img/design.JPG "Design du chenillard")
 
 
 
